@@ -4,7 +4,79 @@
       <img src="../assets/SL Horizontal 1.png" alt="Logo">
       <a href="" style="padding-left: 2%;">Dashboard</a>
       <a style="padding-left: 2%;">Billing</a>
-      <a style="float: right;">John</a>
     </div>
     
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Information</ng-template>
+          <mat-form-field>
+            <mat-label>Device ID</mat-label>
+            <input matInput #input maxlength="6" placeholder="Enter ID" formControlName="id" required>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Device Name</mat-label>
+            <input matInput placeholder="Enter Device Name" formControlName="name" required>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Descriptive Location</mat-label>
+            <input matInput placeholder="Enter Location" formControlName="location" required>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Device Timezone</mat-label>
+            <!-- Just listed placeholders -->
+            <select matNativeControl formControlName="timezone" required>
+              <option value="mountain">GMT -5.00</option>
+              <option value="option2">Option2</option>
+              <option value="option3">Option3</option>
+            </select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <!-- TODO Add ranges per diagram shown -->
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Ranges</ng-template>
+          <mat-form-field>
+            <mat-label>Range1</mat-label>
+            <input matInput formControlName="range1" required>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <mat-label>Range2</mat-label>
+            <input matInput formControlName="range2" required>
+          </mat-form-field>
+          <br/>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>Please check over your selections to verify they are correct.</p>
+        <mat-list>
+          <!-- To clarify and reinstate what was selected -->
+          <mat-list-item> <strong>Device ID:</strong> {{ this.firstFormGroup.value.id }}</mat-list-item>
+          <mat-list-item> <strong>Device Name:</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
+          <mat-list-item> <strong>Device Location:</strong> {{ this.firstFormGroup.value.location }}</mat-list-item>
+          <mat-list-item> <strong>Set Timezone:</strong> {{ this.firstFormGroup.value.timezone }}</mat-list-item>
+          <mat-list-item> <strong>Range1:</strong> {{ this.secondFormGroup.value.range1 }}</mat-list-item>
+          <mat-list-item> <strong>Range2:</strong> {{ this.secondFormGroup.value.range2 }}</mat-list-item>
+        </mat-list>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="submit()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
   </body>
