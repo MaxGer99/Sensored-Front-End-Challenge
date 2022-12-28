@@ -7,6 +7,7 @@
     </div>
     
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <!-- First step / Home step -->
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Information</ng-template>
@@ -38,25 +39,40 @@
             <button mat-button matStepperNext>Next</button>
           </div>
         </form>
+        <div style="position: absolute; top: 20%; right: 20%;">
+          <img src="../assets/MarCell-1.png" alt="Progress-1">
+        </div>
       </mat-step>
+      <!-- Second step -->
       <mat-step [stepControl]="secondFormGroup">
-        <!-- TODO Add ranges per diagram shown -->
+        <!-- TODO Allow slider movement for all forms -->
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Ranges</ng-template>
-          <mat-form-field>
-            <mat-label>Range1</mat-label>
-            <input matInput formControlName="range1" required>
+          <mat-slide-toggle (click)="toggleT()">Temperature alarms</mat-slide-toggle>
+          <br/>
+          <mat-form-field *ngIf="showT">
+            <ngx-slider [(value)]="value1" [(highValue)]="highValue1" [options]="options"></ngx-slider>
           </mat-form-field>
           <br/>
-          <mat-form-field>
-            <mat-label>Range2</mat-label>
-            <input matInput formControlName="range2" required>
+          <mat-slide-toggle (click)="toggleH()">Humidity alarms</mat-slide-toggle>
+          <br/>
+          <mat-form-field *ngIf="showH">
+            <ngx-slider [(value)]="value2" [(highValue)]="highValue2" [options]="options"></ngx-slider>
           </mat-form-field>
           <br/>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
+        </form>
+        <div style="position: absolute; top: 20%; right: 20%;">
+          <img src="../assets/MarCell-2.png" alt="Progress-1">
+        </div>
+      </mat-step>
+      <!-- Third step -->
+      <mat-step>
+        <form [formGroup]="thirdFormGroup">
+
         </form>
       </mat-step>
       <mat-step>
@@ -68,8 +84,8 @@
           <mat-list-item> <strong>Device Name:</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
           <mat-list-item> <strong>Device Location:</strong> {{ this.firstFormGroup.value.location }}</mat-list-item>
           <mat-list-item> <strong>Set Timezone:</strong> {{ this.firstFormGroup.value.timezone }}</mat-list-item>
-          <mat-list-item> <strong>Range1:</strong> {{ this.secondFormGroup.value.range1 }}</mat-list-item>
-          <mat-list-item> <strong>Range2:</strong> {{ this.secondFormGroup.value.range2 }}</mat-list-item>
+          <mat-list-item> <strong>Temp Range:</strong> Low: {{ this.secondFormGroup.value.value1 }}, High: {{ this.secondFormGroup.value.highValue1 }}</mat-list-item>
+          <mat-list-item> <strong>Humidity Range:</strong> Low: {{ this.secondFormGroup.value.value2 }}, High: {{ this.secondFormGroup.value.highValue2 }}</mat-list-item>
         </mat-list>
         <div>
           <button mat-button matStepperPrevious>Back</button>

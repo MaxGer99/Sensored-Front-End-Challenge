@@ -10,6 +10,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import { MatSliderModule } from '@angular/material/slider'; 
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {MatListModule} from '@angular/material/list';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

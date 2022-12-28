@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,11 @@ export class AppComponent {
   thirdFormGroup!: FormGroup;
   fourthFormGroup!: FormGroup;
 
+  //For toggle
+  showT = false;
+  showH = false;
+  buttonName = 'Show';
+  hide: any;
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -42,6 +48,24 @@ export class AppComponent {
       description: ['', Validators.required]
     });
   }
+
+    toggleT() {
+      this.showT = !this.showT
+    }
+
+    toggleH() {
+      this.showH = !this.showH
+    }
+
+      //For sliders
+      value1: number = 40;
+      value2: number = 40;
+      highValue1: number = 60;
+      highValue2: number = 60;
+      options: Options = {
+        floor: 50,
+        ceil: 80
+      };
 
   submit(){
       console.log(this.firstFormGroup.value + this.secondFormGroup.value);

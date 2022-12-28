@@ -8,5 +8,10 @@
     padding: 0 16px;
     align-items: center;
     height: 56px;
+    z-index: 3;
+    opacity: 85%;
   }
   
+.mat-slider{
+    width: 300px;
+}
