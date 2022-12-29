@@ -177,6 +177,11 @@
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup">
           <ng-template matStepLabel>Plan</ng-template>
+
+          <h3>
+            Subscription Plan
+          </h3>
+
           <!-- TODO Add addition information and the calendar -->
               <mat-chip-listbox matNativeControl formControlName="selected" aria-label="Schedule selection">
                 <mat-chip-option value="monthly">One Month</mat-chip-option>
@@ -208,7 +213,9 @@
           <mat-list-item> <strong>Device Location:</strong> {{ this.firstFormGroup.value.location }}</mat-list-item>
           <mat-list-item> <strong>Set Timezone:</strong> {{ this.firstFormGroup.value.timezone }}</mat-list-item>
           <mat-list-item> <strong>Temperature Range:</strong> {{ this.secondFormGroup.value.tempSliderVal }}</mat-list-item>
-          <mat-list-item> <strong>Temperature Range:</strong> {{ this.secondFormGroup.value.humSliderVal }}</mat-list-item>
+          <mat-list-item> <strong>Humidity Range:</strong> {{ this.secondFormGroup.value.humSliderVal }}</mat-list-item>
+          <mat-list-item> <strong>Schedule for:</strong> {{ this.thirdFormGroup.value.schedule }}</mat-list-item>
+          <mat-list-item> <strong>Subscription for:</strong> {{ this.fourthFormGroup.value.selected }}</mat-list-item>
         </mat-list>
         <div>
           <button mat-button matStepperPrevious>Back</button>
