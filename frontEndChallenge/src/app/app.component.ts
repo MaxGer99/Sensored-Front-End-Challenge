@@ -72,7 +72,7 @@ export class AppComponent {
 
       selected: Date | null | undefined;
   submit(){
-      console.log(this.firstFormGroup.value + this.secondFormGroup.value);
+      console.log(this);
   }
 
   test(){
