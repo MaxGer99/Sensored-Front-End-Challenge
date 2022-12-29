@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { Options } from '@angular-slider/ngx-slider';
+import {Options} from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +20,7 @@ export class AppComponent {
   //For toggle
   showT = false;
   showH = false;
+  showC = false;
   buttonName = 'Show';
   hide: any;
 
@@ -34,18 +35,16 @@ export class AppComponent {
     });
 
     this.secondFormGroup = this._formBuilder.group({
-      range1: ['', Validators.required],
-      range2: ['', Validators.required]
+      tempSliderVal: ['', Validators.required],
+      humSliderVal: ['', Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
+      schedule: ['', Validators.required],
     });
 
     this.fourthFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
+      selected: ['', Validators.required]
     });
   }
 
@@ -55,6 +54,10 @@ export class AppComponent {
 
     toggleH() {
       this.showH = !this.showH
+    }
+
+    toggleC() {
+      this.showC = !this.showC
     }
 
       //For sliders
@@ -67,7 +70,12 @@ export class AppComponent {
         ceil: 80
       };
 
+      selected: Date | null | undefined;
   submit(){
       console.log(this.firstFormGroup.value + this.secondFormGroup.value);
+  }
+
+  test(){
+    console.log(this.selected)
   }
 }

@@ -6,11 +6,25 @@
       <a style="padding-left: 2%;">Billing</a>
     </div>
     
+    
+    <div style="padding-left: 2.5em;">
+      <h2>
+        Register a new device
+      </h2>
+      <p>
+        Follow the steps to register a new MarCELL
+      </p>
+    </div>
+    
+
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <!-- First step / Home step -->
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Information</ng-template>
+          <h4>
+            Register a new device
+          </h4>
           <mat-form-field>
             <mat-label>Device ID</mat-label>
             <input matInput #input maxlength="6" placeholder="Enter ID" formControlName="id" required>
@@ -39,7 +53,7 @@
             <button mat-button matStepperNext>Next</button>
           </div>
         </form>
-        <div style="position: absolute; top: 20%; right: 20%;">
+        <div style="position: absolute; top: 25%; right: 20%;">
           <img src="../assets/MarCell-1.png" alt="Progress-1">
         </div>
       </mat-step>
@@ -48,32 +62,141 @@
         <!-- TODO Allow slider movement for all forms -->
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Ranges</ng-template>
-          <mat-slide-toggle (click)="toggleT()">Temperature alarms</mat-slide-toggle>
+          <!-- <mat-slide-toggle (click)="toggleT()">Temperature alarms</mat-slide-toggle> -->
+          <h3>
+            Device Ranges
+          </h3>
           <br/>
-          <mat-form-field *ngIf="showT">
-            <ngx-slider [(value)]="value1" [(highValue)]="highValue1" [options]="options"></ngx-slider>
+          <!-- would include *ngIf="showT" but causes a plethora of issues, would functionally hide and show the value below -->
+          <mat-form-field> 
+            <mat-label>Device Temp Range</mat-label>
+            <br/>
+            <ngx-slider [(value)]="value1" [(highValue)]="highValue1" [options]="options" formControlName="tempSliderVal">
+              <input matInput type="number" [(ngModel)]="value1">
+              <input matInput type="number" [(ngModel)]="highValue1">
+            </ngx-slider>
           </mat-form-field>
           <br/>
-          <mat-slide-toggle (click)="toggleH()">Humidity alarms</mat-slide-toggle>
-          <br/>
-          <mat-form-field *ngIf="showH">
-            <ngx-slider [(value)]="value2" [(highValue)]="highValue2" [options]="options"></ngx-slider>
+          <mat-form-field> 
+            <mat-label>Device Humidity Range</mat-label>
+            <br/>
+            <ngx-slider [(value)]="value2" [(highValue)]="highValue2" [options]="options" formControlName="humSliderVal">
+              <input matInput type="number" [(ngModel)]="value2">
+              <input matInput type="number" [(ngModel)]="highValue2">
+            </ngx-slider>
           </mat-form-field>
+          <div>
+            <p>
+              Slide the blue circles to identify "safe" ranges withing humidity and temperature
+            </p>
+          </div>
+          <!-- <mat-slide-toggle (click)="toggleH()">Humidity alarms</mat-slide-toggle> -->
           <br/>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </form>
-        <div style="position: absolute; top: 20%; right: 20%;">
+        <div style="position: absolute; top: 25%; right: 20%;">
           <img src="../assets/MarCell-2.png" alt="Progress-1">
         </div>
       </mat-step>
       <!-- Third step -->
-      <mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Alerts</ng-template>
+
+          <h3>
+            Notification Schedule
+          </h3>
+
+          <!-- These can be dynamically loaded -->
+          <mat-card style="width: 40%;" formControlName="Humidity">
+            <mat-card-header>
+              <mat-card-title>Humidity</mat-card-title>
+              <mat-card-subtitle>emailaddress@gmail.com</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Some Message
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Edit</button>
+              <button mat-button>Delete</button>
+            </mat-card-actions>
+          </mat-card>
+
+          <mat-card style="width: 40%;" formControlName="Power">
+            <mat-card-header>
+              <mat-card-title>Power</mat-card-title>
+              <mat-card-subtitle>emailaddress@gmail.com</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Some Message
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Edit</button>
+              <button mat-button>Delete</button>
+            </mat-card-actions>
+          </mat-card>
+
+          <mat-card style="width: 40%;" formControlName="Temperature">
+            <mat-card-header>
+              <mat-card-title>Temperature</mat-card-title>
+              <mat-card-subtitle>emailaddress@gmail.com</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Some Message
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Edit</button>
+              <button mat-button>Delete</button>
+            </mat-card-actions>
+          </mat-card>
+
+          <mat-chip-listbox selectable multiple matNativeControl formControlName="schedule" aria-label="Schedule selection">
+            <mat-chip-option value="humidity">Humidity</mat-chip-option>
+            <mat-chip-option value="power">Power</mat-chip-option>
+            <mat-chip-option value="temperature">Temperature</mat-chip-option>
+          </mat-chip-listbox>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+        <div style="position: absolute; top: 25%; right: 20%;">
+          <img src="../assets/MarCell-3.png" alt="Progress-2">
+        </div>
+      </mat-step>
+      <!-- Fourth step -->
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>Plan</ng-template>
+          <!-- TODO Add addition information and the calendar -->
+              <mat-chip-listbox matNativeControl formControlName="selected" aria-label="Schedule selection">
+                <mat-chip-option value="monthly">One Month</mat-chip-option>
+                <mat-chip-option value="yearly">Twelve Months</mat-chip-option>
+              </mat-chip-listbox>
+              
+
+          <!-- <mat-calendar [(selected)]="selected">
+                <input matInput type="date" [(ngModel)]="selected">
+              </mat-calendar> -->
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
 
         </form>
+        <div style="position: absolute; top: 25%; right: 20%;">
+          <img src="../assets/MarCell-4.png" alt="Progress-3">
+        </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
@@ -84,13 +207,16 @@
           <mat-list-item> <strong>Device Name:</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
           <mat-list-item> <strong>Device Location:</strong> {{ this.firstFormGroup.value.location }}</mat-list-item>
           <mat-list-item> <strong>Set Timezone:</strong> {{ this.firstFormGroup.value.timezone }}</mat-list-item>
-          <mat-list-item> <strong>Temp Range:</strong> Low: {{ this.secondFormGroup.value.value1 }}, High: {{ this.secondFormGroup.value.highValue1 }}</mat-list-item>
-          <mat-list-item> <strong>Humidity Range:</strong> Low: {{ this.secondFormGroup.value.value2 }}, High: {{ this.secondFormGroup.value.highValue2 }}</mat-list-item>
+          <mat-list-item> <strong>Temperature Range:</strong> {{ this.secondFormGroup.value.tempSliderVal }}</mat-list-item>
+          <mat-list-item> <strong>Temperature Range:</strong> {{ this.secondFormGroup.value.humSliderVal }}</mat-list-item>
         </mat-list>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
           <button mat-button (click)="submit()">Submit</button>
+        </div>
+        <div style="position: absolute; top: 25%; right: 20%;">
+          <img src="../assets/MarCell-Finished.png" alt="Done-Img">
         </div>
       </mat-step>
     </mat-horizontal-stepper>
