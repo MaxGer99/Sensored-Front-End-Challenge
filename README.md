@@ -7,3 +7,5 @@ This is a mockup registration flow of how to register a new device for acustomer
 To run: 
 cd frontEndChallenge
 ng serve
+
+(Due to an issue I don't understand, please inspect element twice by opening and closing it to load the elements)
