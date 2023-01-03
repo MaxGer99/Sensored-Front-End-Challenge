@@ -70,9 +70,27 @@ export class AppComponent {
         ceil: 80
       };
 
+      //For calendar TODO
       selected: Date | null | undefined;
+
+
   submit(){
-      console.log(this);
+
+    let seen: any[] = [];
+
+    //Converting everything in dom to Json String
+    JSON.stringify(this, function(key, val) {
+      if (val != null && typeof val == "object") {
+           if (seen.indexOf(val) >= 0) {
+               return;
+           }
+           seen.push(val);
+       }
+       return val;
+   });
+
+   //Return Json String
+    console.log(seen);
   }
 
   test(){
